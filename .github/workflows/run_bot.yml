@@ -1,0 +1,25 @@
+name: Run Memecoin Tracker Bot
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"   # Toutes les 12 heures
+  workflow_dispatch:         # Permet aussi de le lancer manuellement
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run the bot
+        run: python memecoin_tracker.py
